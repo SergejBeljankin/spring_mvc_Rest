@@ -1,0 +1,52 @@
+CREATE DATABASE `spring_boot_rest`;
+use `spring_boot_rest`;
+CREATE TABLE `persons` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `surname` varchar(255) DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  PRIMARY KEY (`id`));
+
+  CREATE TABLE `roles` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)) ;
+
+CREATE TABLE `persons_roles` (
+  `user_id` bigint NOT NULL,
+  `role_id` bigint NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  foreign key (`user_id`) references `persons`(`id`),
+  foreign key (`role_id`) references `roles`(`id`)
+) ;
+insert into `roles` (`name`)
+values
+('ROLE_USER'), ('ROLE_ADMIN'), ('ROLE_MANAGER');
+
+
+insert into `persons` (`username`, `password`, `name`, `surname`,`age`)
+values
+('info@yandex.ru', '$2a$10$IB8qPy3wa4rkfIwf/hWll.Rr8VabWvpd8ZnKt3wPdz91EjrPGt9qy', 'user', 'user', 10);
+
+insert into `persons` (`username`, `password`, `name`, `surname`,`age`)
+values
+('petr@yandex.ru', '$2a$10$IB8qPy3wa4rkfIwf/hWll.Rr8VabWvpd8ZnKt3wPdz91EjrPGt9qy', 'Петр', 'Иванов', 20);
+
+insert into `persons` (`username`, `password`, `name`, `surname`,`age`)
+values
+('ivan@yandex.ru', '$2a$10$IB8qPy3wa4rkfIwf/hWll.Rr8VabWvpd8ZnKt3wPdz91EjrPGt9qy', 'Иван', 'Петров', 25);
+
+
+insert into `persons` (`username`, `password`, `name`, `surname`,`email`)
+values
+('semen@yandex.ru', '$2a$10$IB8qPy3wa4rkfIwf/hWll.Rr8VabWvpd8ZnKt3wPdz91EjrPGt9qy', 'Семен', 'Сидоров', 30);
+
+
+insert into `persons_roles` (`user_id`, `role_id`) values (1, 2);
+
+insert into `persons_roles` (`user_id`, `role_id`) values (2, 2);
+insert into `persons_roles` (`user_id`, `role_id`) values (2, 3);
+insert into `persons_roles` (`user_id`, `role_id`) values (3, 1);
+insert into `persons_roles` (`user_id`, `role_id`) values (4, 3);
